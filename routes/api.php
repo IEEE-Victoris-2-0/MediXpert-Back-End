@@ -34,7 +34,7 @@ Route::get("drug/{id}",[DrugController::class,'show']);
 Route::post('add_drug',[DrugController::class,'insert']);
 Route::put("edit_drug/{id}",[DrugController::class,'edit']);
 Route::delete('delete_drug/{id}',[DrugController::class,'destroy']);
-////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 Route::get("pharamcyies",[PharamcyController::class,'index']);
 Route::get('pharmacy/{id}',[PharamcyController::class,'show']);
 Route::post('add_pharmacy',[PharamcyController::class,'insert']);
