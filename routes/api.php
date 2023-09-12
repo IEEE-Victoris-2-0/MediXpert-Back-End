@@ -2,6 +2,7 @@
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\DrugController;
 use App\Http\Controllers\Api\EmailVerficationController;
+use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\PharamcyController;
 use Illuminate\Http\Request;
@@ -40,5 +41,8 @@ Route::get('pharmacy/{id}',[PharamcyController::class,'show']);
 Route::post('add_pharmacy',[PharamcyController::class,'insert']);
 Route::put('edit_pharma/{id}',[PharamcyController::class,'edit']);
 Route::delete('delete_pharma/{id}',[PharamcyController::class,'destroy']);
+////////////////////////////////////////////////////////////////////
+Route::get('home',[HomeController::class,'index']);
+Route::get('drug_by_categ/{id}',[HomeController::class,'product_by_category']);
 
 
