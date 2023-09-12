@@ -15,7 +15,7 @@ class DrugController extends Controller
     {
          $Drugs = Drug::all(); 
         $array = [ 
-            'data'=> DrugResource::collection($Drugs) , 
+            'data'=> DrugResource::collection($Drugs), 
             'msg'=>"okay", 
             'status'=>200
         ];

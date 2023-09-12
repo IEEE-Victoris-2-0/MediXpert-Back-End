@@ -1,28 +1,28 @@
 <?php
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\DrugController;
-use App\Http\Controllers\Api\EmailVerficationController;
 use App\Http\Controllers\Api\HomeController;
-use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\PharamcyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\RegisterController;
-use App\Http\Controllers\Api\ForgetPasswordController;
-use App\Http\Controllers\Api\ResetPasswordController;
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\LogoutController;
+use App\Http\Controllers\Api\NewPasswordController;
+use App\Http\Controllers\Api\EmailVerificationController;
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 /////////////////////////////////////////////////////////
-Route::post("register",[RegisterController::class,"register"]);
-Route::post("login",[LoginController::class,"login"]);
-Route::post("password/forget-password",[ForgetPasswordController::class,'forgetpassword']);
-Route::post("password/reset-password",[ResetPasswordController::class,'PassworReset']);
-Route::middleware('auth:sanctum')->group(function () {
-Route::post("email-verification",[EmailVerficationController::class,'email_verification']);
- Route::get("email-verification",[EmailVerficationController::class,'send_email_verification']);
-});
+Route::post('register', [RegisterController::class, 'register']);
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout',[LogoutController::class,'logout'])->middleware('auth:sanctum');
+Route::post('email/verification-notification', [EmailVerificationController::class, 'sendVerificationEmail'])->middleware('auth:sanctum');
+Route::get('verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify')->middleware('auth:sanctum');
+Route::post('forgot-password', [NewPasswordController::class, 'forgotPassword']);
+Route::post('reset-password', [NewPasswordController::class, 'reset']);
 ///////////////////////////////////////////////////////////
 Route::get("categories",[CategoryController::class,'index']);
 Route::get("category/{id}",[CategoryController::class,'show']);

@@ -13,5 +13,10 @@ class Category extends Model
         'category_name', 
         'image'
     ];
+
+    public function Drug()
+    {
+        return $this->hasMany(Drug::class);
+    }
     
 }
