@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Drug;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class CartController extends Controller
