@@ -17,9 +17,9 @@ class CartController extends Controller
         $qty = $request->input('qty');
         $user = $request->user();
 
-        if (!$user) {
-            throw ValidationException::withMessages(['status' => 'login to complete']);
-        }
+        // if (!$user) {
+        //     throw ValidationException::withMessages(['status' => 'login to complete']);
+        // }
 
         $drug = Drug::find($drug_id);
 
