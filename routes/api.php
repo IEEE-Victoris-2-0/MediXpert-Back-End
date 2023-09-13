@@ -45,13 +45,8 @@ Route::get('home',[HomeController::class,'index']);
 Route::get('drug_by_categ/{id}',[HomeController::class,'product_by_category']);
 /////////////////////////////////////////////////////////////////////
 
+Route::post('add-to-cart',[CartController::class,'addtocart'])->middleware('auth:api');
 
- Route::middleware(['auth:api'])->group(function(){
-    Route::post('add-to-cart',[CartController::class,'addtocart']);
-  });
-
-//Route::post('add-to-cart',[CartController::class,'addtocart'])->middleware('auth:api');
-
-//Route::get('cart',[CartController::class,'viwecart'])->middleware('auth:sanctum');
+Route::get('cart',[CartController::class,'viwecart'])->middleware('auth:api');
  
 
