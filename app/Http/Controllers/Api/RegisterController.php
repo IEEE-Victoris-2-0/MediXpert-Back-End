@@ -30,7 +30,7 @@ class RegisterController extends Controller
 
         return response()->json(
             [
-                'message'=>'User Registered succe',
+                'message'=>'User Registered ',
                 'data'=> ['token' => $token->plainTextToken, 'user' => $user]
             ]
         );

@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\NewPasswordController;
 use App\Http\Controllers\Api\EmailVerificationController;
+use App\Http\Controllers\Api\CartController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -44,5 +45,14 @@ Route::delete('delete_pharma/{id}',[PharamcyController::class,'destroy']);
 ////////////////////////////////////////////////////////////////////
 Route::get('home',[HomeController::class,'index']);
 Route::get('drug_by_categ/{id}',[HomeController::class,'product_by_category']);
+/////////////////////////////////////////////////////////////////////
 
+// Route::post('add-to-cart',[CartController::class,'addtocart']);
+// Route::middleware(['auth'])->group(function(){
+//  });
+
+Route::post('add-to-cart',[CartController::class,'addtocart'])->middleware('auth:sanctum');
+
+Route::get('cart',[CartController::class,'viwecart']);
+ 
 
