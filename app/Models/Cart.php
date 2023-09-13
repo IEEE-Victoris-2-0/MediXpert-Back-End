@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Drug;
 
 class Cart extends Model
 {
@@ -14,4 +15,10 @@ class Cart extends Model
         'drug_id',
         'qty'
     ];
+
+
+    public function drug()
+    {
+        return $this->belongsTo(Drug::class,'drug_id','id');
+    }
 }

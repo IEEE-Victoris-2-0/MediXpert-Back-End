@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Drug;
-use App\Models\User;
-use Illuminate\Validation\ValidationException;
+use illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -16,10 +15,6 @@ class CartController extends Controller
         $drug_id = $request->input('drug_id');
         $qty = $request->input('qty');
         $user = $request->user();
-
-        // if (!$user) {
-        //     throw ValidationException::withMessages(['status' => 'login to complete']);
-        // }
 
         $drug = Drug::find($drug_id);
 
@@ -44,9 +39,36 @@ class CartController extends Controller
         return response()->json(['status' => 'added to cart'], 201);
     }
 
-    public function viwecart(Request $request)
-    {
-        $cart = Cart::where('user_id',$request->user()->id());
-        return response($cart,201);
+    public function viewCart(Request $request)
+{
+    $user = $request->user();
+    $cart = Cart::where('user_id', $user->id)->first();
+    
+    if (!$cart) {
+        return response()->json(['status' => 'Your cart is empty']);
     }
+
+    return response()->json($cart);
+}
+public function removeFromCart(Request $request)
+{
+    $user = $request->user(); // Get the authenticated user
+
+    if (!$user) {
+        return response()->json(['status' => 'Please log in to complete'], 401);
+    }
+
+    $drug_id = $request->input('drug_id');
+
+    $existingCartItem = Cart::where('drug_id', $drug_id)
+                            ->where('user_id', $user->id)
+                            ->first();
+
+    if ($existingCartItem) {
+        $existingCartItem->delete();
+        return response()->json(['status' => 'Drug Deleted Successfully']);
+    }
+
+    return response()->json(['status' => 'Drug not found in the cart'], 404);
+}
 }
