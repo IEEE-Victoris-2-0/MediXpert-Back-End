@@ -47,6 +47,7 @@ Route::get('drug_by_categ/{id}',[HomeController::class,'product_by_category']);
 Route::post('add-to-cart',[CartController::class,'addtocart'])->middleware('auth:api');
 Route::get('cart',[CartController::class,'viewCart'])->middleware('auth:api');
 Route::delete('removefromcart',[CartController::class,'removeFromCart'])->middleware('auth:api');
+Route::post('update_cart',[CartController::class,'UpdateCart'])->middleware('auth:api');
 
  
 
