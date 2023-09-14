@@ -45,14 +45,14 @@ class CheckoutController extends Controller
                 "qty" => $item->qty,
             ])->get();
         }
-        
+
         $drug = Drug::where('id',$item->drug_id)->first();
         $drug->qty -= $item->qty;
 
         $array = [
             "cart_items" => $cartItems,
             'order_details' => $order,
-            'order_items'=>$order_items , 
+            'order_items'=>$order_items,
         ];
         Cart::destroy($cartItems);
         return response($array, 201);
