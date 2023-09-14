@@ -58,7 +58,6 @@ public function UpdateCart(Request $request)
 {
     $drug_id = $request->input('drug_id');
     $qty = $request->input('qty');
-
     if ($request->user()) {
         Cart::updateOrCreate(
             ['drug_id' => $drug_id, 'user_id' => $request->user()->id],
