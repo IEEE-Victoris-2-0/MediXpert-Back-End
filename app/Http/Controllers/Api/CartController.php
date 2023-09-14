@@ -53,9 +53,26 @@ class CartController extends Controller
     ];
     return response($array,201);
 }
+
+public function UpdateCart(Request $request)
+{
+    $drug_id = $request->input('drug_id');
+    $qty = $request->input('qty');
+
+    if ($request->user()) {
+        Cart::updateOrCreate(
+            ['drug_id' => $drug_id, 'user_id' => $request->user()->id],
+            ['qty' => $qty]
+        );
+
+        return response()->json(["status" => "Quantity Updated"]);
+    }
+
+    return response()->json(["status" => "Everything up to date"]);
+}
 public function removeFromCart(Request $request)
 {
-    if (!$user = $request->user()) {
+    if (!$request->user()) {
         return response()->json(['status' => 'Please log in to complete'], 401);
     }
     Cart::where('id', $request->input('item_id'))?->delete();
