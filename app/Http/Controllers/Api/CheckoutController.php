@@ -23,7 +23,7 @@ class CheckoutController extends Controller
         }
 
         $order = new Order();
-        $order->user_id = $user;
+        $order->user_id = $user->id;
         $order->fname = $request->input('fname');     
         $order->lname = $request->input('lname');     
         $order->phone = $request->input('phone');     
