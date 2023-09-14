@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\Api\DrugController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\PharamcyController;
@@ -45,9 +46,13 @@ Route::get('home',[HomeController::class,'index']);
 Route::get('drug_by_categ/{id}',[HomeController::class,'product_by_category']);
 /////////////////////////////////////////////////////////////////////
 Route::post('add-to-cart',[CartController::class,'addtocart'])->middleware('auth:api');
-Route::get('cart',[CartController::class,'viewCart'])->middleware('auth:api');
 Route::delete('removefromcart',[CartController::class,'removeFromCart'])->middleware('auth:api');
 Route::post('update_cart',[CartController::class,'UpdateCart'])->middleware('auth:api');
+
+Route::middleware(['auth:api'])->group(function(){
+Route::get('cart',[CartController::class,'viewCart']);
+Route::post('place-order',[CheckoutController::class,'PlaceOrder']);
+});
 
  
 
