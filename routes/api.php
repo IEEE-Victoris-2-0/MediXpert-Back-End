@@ -54,6 +54,7 @@ Route::middleware(['auth:api'])->group(function(){
 Route::get('cart',[CartController::class,'viewCart']);
 Route::post('place-order',[CheckoutController::class,'PlaceOrder']);
 Route::get('myorders',[UserOrders::class,'orders']);
+Route::get('orders_itmes',[UserOrders::class,'orders_itmes']);
 });
 
 
