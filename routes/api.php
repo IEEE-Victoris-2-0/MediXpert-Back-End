@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\NewPasswordController;
 use App\Http\Controllers\Api\EmailVerificationController;
 use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\UserOrders;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -52,7 +53,9 @@ Route::post('update_cart',[CartController::class,'UpdateCart'])->middleware('aut
 Route::middleware(['auth:api'])->group(function(){
 Route::get('cart',[CartController::class,'viewCart']);
 Route::post('place-order',[CheckoutController::class,'PlaceOrder']);
+Route::get('myorders',[UserOrders::class,'orders']);
 });
+
 
  
 

@@ -40,19 +40,20 @@ class CartController extends Controller
     }
 
     public function viewCart(Request $request)
-{
-    $user = $request->user();
-    $cart = Cart::where('user_id', $user->id)->get();
-    
-    if (!$cart) {
-        return response()->json(['status' => 'Your cart is empty']);
+    {
+        $user = $request->user();
+        $cart = Cart::where('user_id', $user->id)->get();
+        
+        if ($cart->count() === 0) {
+            return response()->json(['status' => 'Your cart is empty']);
+        }
+        
+        $array = [
+            'user' => $user,
+            "cartitems" => $cart,
+        ];
+        return response($array, 201);
     }
-    $array = [
-        'user'=>$user,
-        "cartitems"=>$cart,
-    ];
-    return response($array,201);
-}
 
 public function UpdateCart(Request $request)
 {
