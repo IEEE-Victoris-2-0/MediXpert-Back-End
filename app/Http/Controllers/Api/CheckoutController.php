@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -30,7 +29,7 @@ class CheckoutController extends Controller
         $order->address = $request->input('address');     
         $order->state = $request->input('state');     
         $order->city = $request->input('city');     
-        $order->order_status = $request->input('order_status');     
+        //$order->order_status = $request->input('order_status')->default('0');     
         $order->tracking_no = 'Medixpert' . rand(1111, 9999); 
         $order->save();
 

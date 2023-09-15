@@ -3,6 +3,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\Api\DrugController;
 use App\Http\Controllers\Api\HomeController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\PharamcyController;
 use App\Http\Controllers\Api\WhislistController;
 use Illuminate\Http\Request;
@@ -64,7 +65,9 @@ Route::post('updateorderstatus/{id}',[UserOrders::class,'UpdateOrderStatus']);
 Route::get('whishlist',[WhislistController::class,'index'])->middleware('auth:api');
 Route::post('add_to_whishlist',[WhislistController::class,'addwhishlist'])->middleware('auth:api');
 Route::delete('delete_fromwhishlist',[WhislistController::class,'remove_item'])->middleware('auth:api');
-
+///////////////////////////payment method////////////////////////////////////
+// Route::post("checkout",[CheckoutController::class,'checkout'])->middleware('auth:api');
+Route::post('pay',[PaymentController::class,'payment'])->middleware('auth:api');
 
  
 
