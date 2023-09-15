@@ -26,4 +26,18 @@ class UserOrders extends Controller
         
         return response()->json($orderItems);
     }
+
+    public function OrderDashboard( $id)
+    {
+        $order = Order::find($id);
+        return response()->json($order);
+    }
+
+    public function UpdateOrderStatus(Request $request,$id)
+    {
+        $order = Order::find($id);
+        $order->order_status = $request->input('order_status');
+        $order->update();
+        return response()->json(["status"=>"Order Status Updated Successfully"]);
+    }
 }

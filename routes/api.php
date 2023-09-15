@@ -56,6 +56,9 @@ Route::post('place-order',[CheckoutController::class,'PlaceOrder']);
 Route::get('myorders',[UserOrders::class,'orders']);
 Route::get('orders_itmes',[UserOrders::class,'orders_itmes']);
 });
+/////////////////////////////////////////////////////////////
+Route::post('order/{id}',[UserOrders::class,'OrderDashboard']);
+Route::post('updateorderstatus/{id}',[UserOrders::class,'UpdateOrderStatus']);
 
 
  
