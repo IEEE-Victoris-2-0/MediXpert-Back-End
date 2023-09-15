@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\Api\DrugController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\PharamcyController;
+use App\Http\Controllers\Api\WhislistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\RegisterController;
@@ -59,6 +60,10 @@ Route::get('orders_itmes',[UserOrders::class,'orders_itmes']);
 /////////////////////////////////////////////////////////////
 Route::post('order/{id}',[UserOrders::class,'OrderDashboard']);
 Route::post('updateorderstatus/{id}',[UserOrders::class,'UpdateOrderStatus']);
+///////////////////////////////////////////////////////////////
+Route::get('whishlist',[WhislistController::class,'index'])->middleware('auth:api');
+Route::post('add_to_whishlist',[WhislistController::class,'addwhishlist'])->middleware('auth:api');
+Route::delete('delete_fromwhishlist',[WhislistController::class,'remove_item'])->middleware('auth:api');
 
 
  
