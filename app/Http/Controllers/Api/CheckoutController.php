@@ -28,8 +28,8 @@ class CheckoutController extends Controller
         $order->phone = $request->input('phone');     
         $order->address = $request->input('address');     
         $order->state = $request->input('state');     
-        $order->city = $request->input('city');     
-        //$order->order_status = $request->input('order_status')->default('0');     
+        $order->city = $request->input('city');
+        
         $order->tracking_no = 'Medixpert' . rand(1111, 9999); 
         $order->save();
 

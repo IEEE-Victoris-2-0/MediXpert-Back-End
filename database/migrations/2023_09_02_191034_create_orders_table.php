@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('state');
             $table->string('city');
             $table->tinyInteger('order_status')->default(0);
-            $table->decimal('total_price');
             $table->string("tracking_no");
             $table->timestamps();
         });

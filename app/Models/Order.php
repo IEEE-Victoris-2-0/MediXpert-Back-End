@@ -17,6 +17,7 @@ class Order extends Model
         'address',
         'state',
         'city',
+        'total_price',
         'tracking_no',
     ];
 
