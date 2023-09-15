@@ -17,8 +17,6 @@ class Order extends Model
         'address',
         'state',
         'city',
-        // 'session_id',
-        // 'total_price',
         'tracking_no',
     ];
 
