@@ -70,6 +70,8 @@ Route::delete('delete_fromwhishlist',[WhislistController::class,'remove_item'])-
 Route::post('pay',[PaymentController::class,'payment'])->middleware('auth:api');
 
 //////////////////////search/////////////////////////////////////
-Route::get('search_by_drug',[DrugController::class,'search']);
+Route::get('search_by_drug/{name}',[DrugController::class,'search']);
+Route::get('search_by_category/{name}',[CategoryController::class,'search']);
+Route::get('search_by_pharmacy/{name}',[PharamcyController::class,'search']);
  
 

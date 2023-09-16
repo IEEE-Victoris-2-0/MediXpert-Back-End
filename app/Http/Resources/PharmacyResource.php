@@ -16,9 +16,9 @@ class PharmacyResource extends JsonResource
     {
         return [
             'pharmacy_name'=>$this->pharmacy_name,
-            'pharmacy_address'=>$this->pharmacy_name,
-            'pharmacy_image'=>$this->pharmacy_name,
-            'pharmacy_phone'=>$this->pharmacy_name
+            'pharmacy_address'=>$this->pharmacy_address,
+            'pharmacy_image'=>$this->pharmacy_image,
+            'pharmacy_phone'=>$this->pharmacy_phone
         ];
     }
 }

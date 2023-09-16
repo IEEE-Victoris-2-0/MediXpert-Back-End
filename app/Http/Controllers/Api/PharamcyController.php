@@ -13,7 +13,7 @@ class PharamcyController extends Controller
 
     public function index()
     {
-        $pharm = Pharmacy::all();
+        $pharm = Pharmacy::get();
         $array = [ 
             'data'=> PharmacyResource::collection($pharm) , 
             'msg'=>"okay", 
@@ -122,5 +122,21 @@ class PharamcyController extends Controller
     ];
 
     return response($response, 200);
+    }
+
+    public function search($name)
+    {
+        $pharmacy = Pharmacy::where('pharmacy_name', 'like', "%$name%")
+                            ->orWhere('pharmacy_address', 'like', "%$name%")
+                            ->get();
+    
+        if ($pharmacy->isEmpty()) {
+            $response = [
+                'error' => 'Pharmacy not found'
+            ];
+            return response()->json($response, 404);
+        }
+    
+        return response()->json($pharmacy);
     }
 }

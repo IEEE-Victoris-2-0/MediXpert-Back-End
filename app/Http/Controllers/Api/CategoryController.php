@@ -132,4 +132,19 @@ public function destroy(Request $request , $id)
 
     return response($response, 200);
 }
+
+
+public function search($name)
+{
+    $category = Category::where('category_name', 'like', "%$name%")->get();
+
+    if ($category->isEmpty()) {
+        $response = [
+            'error' => 'category not found'
+        ];
+        return response()->json($response, 404);
+    }
+
+    return response()->json($category);
+}
 }

@@ -127,11 +127,17 @@ public function destroy($id)
     return response($response, 200);
 }
 
-public function search(Request $request){
-    $search = $request->search;
-    $drugs=Drug::where( function($query) use($search){
-       $query->where('drug_name' , 'like' , "%$search%");
-    }) ->get();
+public function search($name)
+{
+    $drugs = Drug::where('drug_name', 'like', "%$name%")->get();
+
+    if ($drugs->isEmpty()) {
+        $response = [
+            'error' => 'Drug not found'
+        ];
+        return response()->json($response, 404);
+    }
+
     return response()->json($drugs);
 }
 
