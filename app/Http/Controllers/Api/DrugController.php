@@ -47,26 +47,19 @@ class DrugController extends Controller
         $request->validate([ 
             'drug_name' => 'required|string',
             'description' => 'required|string', 
-            'drug_image' => 'required|string', // Update the validation rule
+            'drug_image' => 'required|image|:jpg,png,jpeg,gif,svg|max:2048', // Update the validation rule
             'item_price' => 'required|numeric', 
             'qty' => 'required|integer', 
             'category_id' => 'required|numeric',
             'pharmacy_id'=>'required|numeric'
         ]);
+        dd($request);
         
         $drug = new Drug();
-        
-        if($request->hasFile('drug_image')) // Update the file existence check
-        {
-            $file = $request->file('drug_image'); // Update the file retrieval
-            $ext = $file->getClientOriginalExtension();
-            $filename = time().''.$ext;
-            $file->move('assets/uploads/drugs', $filename); 
-            $drug->drug_image = $filename; // Update the image attribute name
-        }
-    
+        $drug_image = $request->file('drug_image')->getClientOriginalName();;
         $drug->drug_name = $request->drug_name;
         $drug->description = $request->description;
+        $drug->drug_image = $request->$drug_image;
         $drug->item_price = $request->item_price;
         $drug->qty = $request->qty;
         $drug->category_id = $request->category_id;
@@ -88,23 +81,17 @@ public function edit(Request $request , $id)
     $request->validate([ 
         'drug_name' => 'required|string',
         'description' => 'required|string', 
-        'drug_image' => '', 
+        'drug_image' => 'required|image|:jpg,png,jpeg,gif,svg|max:2048', 
         'item_price' => 'required|numeric', 
         'qty' => 'required|integer', 
         'category_id' => 'required|numeric',
         'pharmacy_id'=>'required|numeric'
     ]);
-    if($request->hasFile('image'))
-    {
-        $file = $request->file('image');
-        $ext = $file->getClientOriginalExtension();
-        $filename = time().''.$ext;
-        $file->move('assets/uploads/drugs', $filename); 
-        $drug->image = $filename;
-    }
+    $drug_image = $request->file('drug_image')->store('image', 'public');
 
     $drug->drug_name = $request->drug_name;
     $drug->description = $request->description;
+    $drug->drug_image = $request->drug_image;
     $drug->item_price = $request->item_price;
     $drug->qty = $request->qty;
     $drug->category_id = $request->category_id;     
@@ -137,7 +124,16 @@ public function destroy($id)
         'msg' => "drug deleted successfully", 
         'status' => 200
     ];
-
+    
     return response($response, 200);
 }
+
+public function search(Request $request){
+    $search = $request->search;
+    $drugs=Drug::where( function($query) use($search){
+       $query->where('drug_name' , 'like' , "%$search%");
+    }) ->get();
+    return response()->json($drugs);
+}
+
 }

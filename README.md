@@ -6,7 +6,6 @@ MediXpert-Back-End is a Laravel application that provides an API for the MediXpe
 
 ## packages
 - Authentication using Laravel Sanctum: [Learn More](https://laravel.com/docs/10.x/sanctum)
-- Secure OTP implementation using Laravel OTP: [GitHub Repo](https://github.com/ichtrojan/laravel-otp)
 - Secure payment method using Paddle
 
 ## Getting Started

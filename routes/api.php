@@ -69,5 +69,7 @@ Route::delete('delete_fromwhishlist',[WhislistController::class,'remove_item'])-
 // Route::post("checkout",[CheckoutController::class,'checkout'])->middleware('auth:api');
 Route::post('pay',[PaymentController::class,'payment'])->middleware('auth:api');
 
+//////////////////////search/////////////////////////////////////
+Route::get('search_by_drug',[DrugController::class,'search']);
  
 
