@@ -1,6 +1,5 @@
 # MediXpert-Back-End Project
 
-[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 ## Introduction
 MediXpert-Back-End is a Laravel application that provides an API for the MediXpert app.
@@ -32,4 +31,6 @@ MediXpert-Back-End is a Laravel application that provides an API for the MediXpe
  5. php artisan serve
 
 ## API Documentation
-Refer to the <a href="https://documenter.getpostman.com/view/29337762/2s9YC1WEAo"></a> for detailed information on the available endpoints and how to use them.
+Refer to the <a href="https://documenter.getpostman.com/view/29337762/2s9YC1WEAo">MediXpert</a> for detailed information on the available endpoints and how to use them.
+
+## MediXpert Back-End -- Shooting Stars. 
