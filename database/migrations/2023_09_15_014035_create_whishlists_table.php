@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('whishlists', function (Blueprint $table) {
             $table->id();
-            $table->string('user');
+            $table->string('user_id');
             $table->string('drug_id');
             $table->timestamps();
         });

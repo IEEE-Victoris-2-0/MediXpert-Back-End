@@ -47,19 +47,18 @@ class DrugController extends Controller
         $request->validate([ 
             'drug_name' => 'required|string',
             'description' => 'required|string', 
-            'drug_image' => 'required|image|:jpg,png,jpeg,gif,svg|max:2048', // Update the validation rule
+            'drug_image' => 'required|string|:jpg,png,jpeg,gif,svg|max:2048', // Update the validation rule
             'item_price' => 'required|numeric', 
             'qty' => 'required|integer', 
             'category_id' => 'required|numeric',
             'pharmacy_id'=>'required|numeric'
         ]);
-        dd($request);
         
-        $drug = new Drug();
-        $drug_image = $request->file('drug_image')->getClientOriginalName();;
+         $drug = new Drug();
+       // $drug_image = $request->file('drug_image')->getClientOriginalName();;
         $drug->drug_name = $request->drug_name;
         $drug->description = $request->description;
-        $drug->drug_image = $request->$drug_image;
+        $drug->drug_image = $request->drug_image;
         $drug->item_price = $request->item_price;
         $drug->qty = $request->qty;
         $drug->category_id = $request->category_id;
