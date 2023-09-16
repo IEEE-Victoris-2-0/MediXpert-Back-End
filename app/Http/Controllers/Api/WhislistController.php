@@ -14,7 +14,7 @@ class WhislistController extends Controller
     {
         if ($request->user()) {
             try {
-                $wishlist = Whishlist::where('user_id', $request->user()->id)->firstOrFail()->get();
+                $wishlist = Whishlist::where('user_id', $request->user())->firstOrFail()->get();
                 return response()->json($wishlist);
             } catch (ModelNotFoundException $e) {
                 return response()->json(['status' => 'you dont have any wishlist']);

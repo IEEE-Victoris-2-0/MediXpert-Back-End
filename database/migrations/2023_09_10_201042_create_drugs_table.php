@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("drug_name");
             $table->Text("description");
-            $table->string("drug_image")->nullable()->default('default.jpg');
+            $table->string("drug_image");
             $table->decimal("item_price",5,3);
             $table->integer("qty");
             $table->unsignedBigInteger('category_id');

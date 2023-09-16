@@ -21,7 +21,6 @@ class DrugResource extends JsonResource
             'item_price'=>$this->item_price,
             'qty'=>$this->qty,
             'category_id'=>$this->category_id,
-            //'drugname'=>$this->drug_name,
         ];
     }
 }

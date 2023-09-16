@@ -43,44 +43,44 @@ class DrugController extends Controller
     }
 
     public function insert(Request $request)
-{
-    $request->validate([ 
-        'drug_name' => 'required|string',
-        'description' => 'required|string', 
-        'drug_image' => 'required|string', 
-        'item_price' => 'required|numeric', 
-        'qty' => 'required|integer', 
-        'category_id' => 'required|numeric',
-        'pharmacy_id'=>'required|numeric'
-    ]);
-    
-    $drug = new Drug();
-    
-    if($request->hasFile('image'))
     {
-        $file = $request->file('image');
-        $ext = $file->getClientOriginalExtension();
-        $filename = time().''.$ext;
-        $file->move('assets/uploads/drugs', $filename); 
-        $drug->image = $filename;
+        $request->validate([ 
+            'drug_name' => 'required|string',
+            'description' => 'required|string', 
+            'drug_image' => 'required|string', // Update the validation rule
+            'item_price' => 'required|numeric', 
+            'qty' => 'required|integer', 
+            'category_id' => 'required|numeric',
+            'pharmacy_id'=>'required|numeric'
+        ]);
+        
+        $drug = new Drug();
+        
+        if($request->hasFile('drug_image')) // Update the file existence check
+        {
+            $file = $request->file('drug_image'); // Update the file retrieval
+            $ext = $file->getClientOriginalExtension();
+            $filename = time().''.$ext;
+            $file->move('assets/uploads/drugs', $filename); 
+            $drug->drug_image = $filename; // Update the image attribute name
+        }
+    
+        $drug->drug_name = $request->drug_name;
+        $drug->description = $request->description;
+        $drug->item_price = $request->item_price;
+        $drug->qty = $request->qty;
+        $drug->category_id = $request->category_id;
+        $drug->pharmacy_id = $request->pharmacy_id; // Remove the extra space
+        $drug->save(); 
+    
+        $response = [
+            'data' => $drug,
+            'msg' => "Drug added successfully", 
+            'status' => 200
+        ];
+    
+        return response($response, 200);
     }
-
-    $drug->drug_name = $request->drug_name;
-    $drug->description = $request->description;
-    $drug->item_price = $request->item_price;
-    $drug->qty = $request->qty;
-    $drug->category_id = $request->category_id;
-    $drug-> pharmacy_id = $request->pharmacy_id;    
-    $drug->save(); 
-
-    $response = [
-        'data' => $drug,
-        'msg' => "Drug added successfully", 
-        'status' => 200
-    ];
-
-    return response($response, 200);
-}
 
 public function edit(Request $request , $id)
 {
@@ -88,7 +88,7 @@ public function edit(Request $request , $id)
     $request->validate([ 
         'drug_name' => 'required|string',
         'description' => 'required|string', 
-        'drug_image' => 'required|string', 
+        'drug_image' => '', 
         'item_price' => 'required|numeric', 
         'qty' => 'required|integer', 
         'category_id' => 'required|numeric',
