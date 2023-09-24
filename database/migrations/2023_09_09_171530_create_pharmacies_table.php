@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("pharmacy_name");
             $table->string("pharmacy_address");
-            $table->string("pharmacy_image")->nullable()->default('default.jpg');
+            $table->string("pharmacy_image")->nullable();
             $table->integer("pharmacy_phone");
             $table->timestamps();
         });
